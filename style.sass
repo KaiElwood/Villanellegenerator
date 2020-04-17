@@ -1,15 +1,60 @@
-// $primaryBlue:
+$primaryBlue: #C7E6F4
+$bookCover: #9AD8D4
 // $backgroundColor:
 $mainFont: 'Special Elite', cursive
+$bookHeight: 70vh
+$bookWidth: 30vw
 
-// =border-radius($radius)
-//     -webkit-border-radius: $radius
-//     -ms-border-radius: $radius
-//     border-radius: $radius
+=border-radius($radius)
+    // -webkit-border-radius: $radius
+    // -ms-border-radius: $radius
+    // border-radius: $radius
+    border-top-right-radius: $radius
+    border-bottom-right-radius: $radius
+
+=box-shadow
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2)
 
 
     
 *
-    margin: 0
-    padding: 0
     font-family: $mainFont
+    body
+        background-color: $primaryBlue
+
+#header
+    margin: auto
+    text-align: center
+    width: 100%
+    ul
+        text-align: center
+
+    li
+        list-style-type: none
+        text-decoration-style: none
+        float: left
+        padding: 30px
+
+#book
+    display: flex
+    transform-style: preserve-3d
+    position: relative
+    cursor: pointer
+    backface-visibility: visible
+    height: $bookHeight
+    width: $bookWidth
+    +border-radius(1em)
+    +box-shadow
+    :hover
+        background-color: $bookCover
+    div
+        position: absolute
+        +border-radius(1em)
+        transform-style: preserve-3d
+        top: 0
+        left: 0
+        transform-origin: left center
+        transition: transform .5s ease-in-out, box-shadow .35s ease-in-out
+    div
+        height: 100%
+        width: 100%
