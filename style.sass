@@ -25,7 +25,7 @@ $bookWidth: 33vw
 #front
     #header
         // position: relative
-        top: 10%
+        top: 5%
         left: 5%
         text-align: center
         position: absolute
@@ -37,10 +37,12 @@ $bookWidth: 33vw
             width: 80%
     p
         position: absolute
+        top: 200px
+        left: 50px
         z-index: 999
 
     #footer
-        position: relative
+        position: absolute
         top:90%
         padding-left: 5%
         button
@@ -56,18 +58,19 @@ $bookWidth: 33vw
     transform-style: preserve-3d
     position: relative
     // cursor: pointer
-    backface-visibility: visible
+    // backface-visibility: visible
     height: $bookHeight
     width: $bookWidth
     min-width: 400px
     +border-radius(1em)
     +box-shadow
-    // :hover
-    //     background-color: $primaryBlue
-    //     +border-radius(1em)
-    //     #page1
-    //         transform: rotateY(-160deg) scale(1.1)
-    //         +box-shadow
+    #front, #back
+        background: #D3CCE3 
+        background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)
+        background: linear-gradient(to right, #E9E4F0, #D3CCE3)
+
+    #page1, #page2, #page3, #page4, #page5, #page6
+        background-color: #F9D8A7
     >div
         position: absolute
         +border-radius(1em)
@@ -75,8 +78,40 @@ $bookWidth: 33vw
         top: 0
         left: 0
         transform-origin: left center
-        transition: transform .5s ease-in-out, box-shadow .35s ease-in-out
+        transition: transform .5s ease-in-out, box-shadow .35s ease-in-out, display .8s ease-in-out
     // #page1, #page2, #page3, #page4, #page5, #page6
     >div
         height: 100%
         width: 100%
+
+
+// only apply when button is pressed
+.poems
+    // justify-content: flex-end
+    +border-radius(1em)
+    #front
+        transform: rotateY(-160deg) scale(1.1)
+        +box-shadow
+        #text
+            display: none
+    #page1
+        transform: rotateY(-150deg) scale(1.1)
+        +box-shadow
+    #page2
+        transform: rotateY(-30deg) scale(1.1)
+        +box-shadow
+    #page3
+        transform: rotateY(-140deg) scale(1.1)
+        +box-shadow
+    #page4
+        transform: rotateY(-40deg) scale(1.1)
+        +box-shadow
+    #page5
+        transform: rotateY(-130deg) scale(1.1)
+        +box-shadow
+    #page6
+        transform: rotateY(-50deg) scale(1.1)
+        +box-shadow
+    #back
+        transform: rotateY(-20deg) scale(1.1)
+        +box-shadow

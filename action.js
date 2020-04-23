@@ -1,9 +1,10 @@
 // alert("connected")
 
+// ----------- variables
 const randomPoem = document.getElementById("find");
 const textInput = document.getElementById("input");
 
-// listen for enter on keyboard
+// ----------- listen for enter on keyboard
 textInput.addEventListener("keyup", function(e){
     // if key pressed is enter
     if (e.keyCode === 13){
@@ -15,11 +16,12 @@ textInput.addEventListener("keyup", function(e){
     }
 })
 
-// random article
+// ----------- random article
 randomPoem.addEventListener("click", function(){
     app.initialize();
 })
 
+// ----------- Main App
 var app = {
     wikiText: [],
     wikiTitle: [],
@@ -27,7 +29,6 @@ var app = {
 
     // transmit input to next function
     initialize: function (input) {
-        debugger
         app.getWikipediaData(input);
     },
 
@@ -50,7 +51,6 @@ var app = {
             var inputWord = input;
             var wikiURL = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + inputWord + "&origin=*&format=json&formatversion=2";
             var searchTerm;
-            alert(wikiURL)
             console.log(wikiURL);
             fetch(wikiURL,
                 {
@@ -73,7 +73,7 @@ var app = {
             console.log("Get Random Wikipedia Data");
             var wikiURL = "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=random&grnnamespace=0&prop=revisions|images&rvprop=content&grnlimit=1&origin=*";
             var searchTerm;
-            alert(wikiURL)
+            // alert(wikiURL)
             console.log(wikiURL);
             fetch(wikiURL,
                 {
@@ -83,9 +83,11 @@ var app = {
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    // debugger;
-                    searchTerm = json.query.search[0].title;
-                    app.getText(searchTerm);
+                    debugger;
+                    pageid = Object.keys(json.query.pages);
+                    var textResults = json.query.pages;
+                    app.wikiText = textResults[`${pageid[0]}`].revisions[0]["*"];
+                    app.wikiTitle = textResults[`${pageid[0]}`].title;
                 })
 
                 .catch(error => {
@@ -96,8 +98,9 @@ var app = {
 
     // search for specified term, most popular from list
     getText: function (searchTerm, pageid) {
-        debugger;
+        // debugger;
         var termURL = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=" + searchTerm + "&rvslots=*&rvprop=content&origin=*&format=json";
+        console.log(termURL);
         fetch(termURL,
             {
                 method: "GET"
@@ -105,12 +108,10 @@ var app = {
         )
             .then(response => response.json())
             .then(json => {
-                // THIS IS THE PROBLEM PART -- NEED TO BE ABLE TO INPUT PAGE ID
                 console.log(json);
-                app.wikiText = f
-                // save specific ID and input it string for wikiText
-                var textResults = `json.query.pages.${pageid}.revisions[0].slots.main`;
-                app.wikiText = textResults;
+                var textResults = json.query.pages;
+                app.wikiText = textResults[`${pageid}`].revisions[0].slots.main["*"];
+                app.wikiTitle = textResults[`${pageid}`].title;
             })
     }
 
