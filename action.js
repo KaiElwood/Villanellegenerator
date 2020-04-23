@@ -4,6 +4,9 @@
 const randomPoem = document.getElementById("find");
 const textInput = document.getElementById("input");
 
+// open book on click
+
+
 // ----------- listen for enter on keyboard
 textInput.addEventListener("keyup", function(e){
     // if key pressed is enter
