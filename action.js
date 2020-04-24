@@ -18,7 +18,7 @@ textInput.addEventListener("keyup", function(e){
         app.initialize(text);
         book.classList.toggle("poems");
         book.classList.toggle("moveRight");
-        app.useRita();
+        // app.useRita();
     }
 })
 
@@ -122,6 +122,10 @@ var app = {
                 app.wikiText = textResults[`${pageid}`].revisions[0].slots.main["*"];
                 app.wikiTitle = textResults[`${pageid}`].title;
             })
+            if (app.wikiText[0]){
+                app.useRita();
+            }
+            // .then(app.useRita())
     },
 
     processSyllables: function(word){
@@ -203,9 +207,23 @@ var app = {
         return line2;
     },
 
-    useRita(){
-        var lines = [];
-        wordDatabase = new RiString(app.wikiText);
+    removeExtras: function(){
+        debugger
+        var tempString = RiTa.stripPunctuation(app.wikiText);
+        var wordDatabase = RiTa.tokenize(tempString);
+        return(wordDatabase);
+        // for (i = 0; i < string.length(); i++) {
+        //     var letter = string.charCodeAt(i);
+        //     if (letter )
+        //     if (string[i] !== )
+        // }
+    },
+// need to add name for this function
+    useRita: function(){
+        debugger
+        wordDatabase = app.removeExtras();
+        // var lines = [];
+        // wordDatabase = new RiString(app.wikiText);
         lines.push(app.lines13());
         lines.push(app.lines2());
         lines.push(app.lines13());
