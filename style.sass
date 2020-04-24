@@ -82,7 +82,8 @@ $bookWidth: 33vw
     width: $bookWidth
     min-width: 400px
     +border-radius(1em)
-    +box-shadow
+    transition: transform 1s ease-in-out
+    // +box-shadow
     #front
         -webkit-box-shadow: inset 2px -1px 2px 4px rgba(5,10,50,.05), inset 3px -1px 1px 1px rgba(5,10,50,.3)
         box-shadow: inset 2px -1px 2px 4px rgba(5,10,50,.05), inset 3px -1px 1px 1px rgba(5,10,50,.3)
@@ -92,7 +93,9 @@ $bookWidth: 33vw
         background: linear-gradient(to right, #E9E4F0, #D3CCE3)
 
     #page1, #page2, #page3, #page4, #page5, #page6
-        background-color: #F9D8A7
+        // background-color: #F9D8A7
+        background: #ffffff
+        background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(255,255,255,1) 3%, rgba(255,255,255,1) 100%)
     >div
         position: absolute
         +border-radius(1em)
@@ -112,28 +115,32 @@ $bookWidth: 33vw
     // justify-content: flex-end
     +border-radius(1em)
     #front
-        transform: rotateY(-160deg) scale(1.1)
+        transform: rotateY(-180deg)
         +box-shadow
         #text
             display: none
     #page1
-        transform: rotateY(-150deg) scale(1.1)
+        transform: rotateY(-170deg)
         +box-shadow
     #page2
-        transform: rotateY(-30deg) scale(1.1)
+        transform: rotateY(-10deg)
         +box-shadow
     #page3
-        transform: rotateY(-140deg) scale(1.1)
+        transform: rotateY(-165deg)
         +box-shadow
     #page4
-        transform: rotateY(-40deg) scale(1.1)
+        transform: rotateY(-15deg)
         +box-shadow
     #page5
-        transform: rotateY(-130deg) scale(1.1)
+        transform: rotateY(-160deg)
         +box-shadow
     #page6
-        transform: rotateY(-50deg) scale(1.1)
+        transform: rotateY(-20deg)
         +box-shadow
     #back
-        transform: rotateY(-20deg) scale(1.1)
+        transform: rotateY(0deg)
         +box-shadow
+
+.moveRight
+    transform: translateX(50%)
+    // left: 25%

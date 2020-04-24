@@ -1,6 +1,7 @@
 // ----------- variables
 const randomPoem = document.getElementById("find");
 const textInput = document.getElementById("input");
+const book = document.getElementById("book");
 
 // open book on click
 
@@ -12,8 +13,12 @@ textInput.addEventListener("keyup", function(e){
         // save text as variable
         var text = textInput.value;
         // reset text
+        debugger
         textInput.value = "";
         app.initialize(text);
+        book.classList.toggle("poems");
+        book.classList.toggle("moveRight");
+        app.useRita();
     }
 })
 
@@ -34,18 +39,21 @@ var app = {
     },
 
     // handles the data input onto page
-    makePoem: function () {
+    makePoem: function (lines) {
+        debugger
         var theHTML = '';
-        for (var i = 0; i < app.nyTimesArticles.length; i++) {
-            theHTML += "<div class='flickrArticle'>";
-            theHTML += "<h3>" + app.nyTimesArticles[i].headline.main + "</h3>";
-            theHTML += "</div>";
+        theHTML += "<h1 class='title'>" + app.wikiTitle + "</h1>";
+        for (var i = 0; i < lines.length; i++) {
+            theHTML += "<p class='haiku'>";
+            theHTML += lines[i];
+            theHTML += "</p>";
         }
-        $('.container').html(theHTML);
+        // sets html for page 4
+        document.getElementById('haikuHolder').innerHTML = theHTML;
     },
 
     // gets data from api
-    getWikipediaData: function (input) {
+    getWikipediaData: function(input){
         // need to parse input value for text --> if text, do stuff. if no text, random article
         if (input){
             console.log("Get Wikipedia Data");
@@ -127,16 +135,29 @@ var app = {
     lines13: function(){
         // while ()
         var syllables = 0;
+        var maxSyllables = 5;
         var line1 = "";
-        debugger
+        var tries = 0;
+        // debugger
         while (true){
+            tries ++;
+            if (tries >20){
+                break;
+            }
             word = RiTa.randomWord();
+            if (app.processSyllables(word) > maxSyllables) {
+                if (maxSyllables === 0){
+                    break;
+                }
+                continue;
+            };
             if (syllables < 5){
                 if (syllables > 5){
                     continue;
                 };
                 // add word to line1
                 syllables += app.processSyllables(word);
+                maxSyllables -= app.processSyllables(word);
                 line1 += (word + " ");
             } else if (syllables>5){
                 continue
@@ -147,12 +168,48 @@ var app = {
         return line1;
     },
 
+    lines2: function(){
+        var syllables = 0;
+        var maxSyllables = 7;
+        var tries = 0;
+        var line2 = "";
+        // debugger
+        while (true) {
+            tries++;
+            if (tries > 20) {
+                break;
+            }
+            word = RiTa.randomWord();
+            if (app.processSyllables(word) > maxSyllables){
+                if (maxSyllables === 0){
+                    break;
+                }
+                continue;
+            };
+            if (syllables < 7) {
+                if (syllables > 7) {
+                    continue;
+                };
+                // add word to line1
+                syllables += app.processSyllables(word);
+                maxSyllables -= app.processSyllables(word);
+                line2 += (word + " ");
+            } else if (syllables > 7) {
+                continue
+            } else {
+                break
+            }
+        }
+        return line2;
+    },
+
     useRita(){
+        var lines = [];
         wordDatabase = new RiString(app.wikiText);
-        line1 = app.lines13()
-        // line2 = app.line2()
-        line3 = app.lines13()
-        // app.makePoem(line1,line2,line3);
+        lines.push(app.lines13());
+        lines.push(app.lines2());
+        lines.push(app.lines13());
+        app.makePoem(lines);
     }
 
 
