@@ -1,5 +1,3 @@
-// alert("connected")
-
 // ----------- variables
 const randomPoem = document.getElementById("find");
 const textInput = document.getElementById("input");
@@ -36,7 +34,7 @@ var app = {
     },
 
     // handles the data input onto page
-    makeHTML: function () {
+    makePoem: function () {
         var theHTML = '';
         for (var i = 0; i < app.nyTimesArticles.length; i++) {
             theHTML += "<div class='flickrArticle'>";
@@ -116,6 +114,45 @@ var app = {
                 app.wikiText = textResults[`${pageid}`].revisions[0].slots.main["*"];
                 app.wikiTitle = textResults[`${pageid}`].title;
             })
+    },
+
+    processSyllables: function(word){
+        rs = new RiString(word);
+        features = rs.features();
+        var syllablesCount = features.syllables.split(/\//).length;
+        return syllablesCount;
+    },
+
+    // parse data with rita
+    lines13: function(){
+        // while ()
+        var syllables = 0;
+        var line1 = "";
+        debugger
+        while (true){
+            word = RiTa.randomWord();
+            if (syllables < 5){
+                if (syllables > 5){
+                    continue;
+                };
+                // add word to line1
+                syllables += app.processSyllables(word);
+                line1 += (word + " ");
+            } else if (syllables>5){
+                continue
+            } else{
+                break
+            }
+        }
+        return line1;
+    },
+
+    useRita(){
+        wordDatabase = new RiString(app.wikiText);
+        line1 = app.lines13()
+        // line2 = app.line2()
+        line3 = app.lines13()
+        // app.makePoem(line1,line2,line3);
     }
 
 
