@@ -2,6 +2,7 @@
 const randomPoem = document.getElementById("find");
 const textInput = document.getElementById("input");
 const book = document.getElementById("book");
+const returnHome = document.getElementById("returnHome");
 
 // open book on click
 
@@ -15,10 +16,8 @@ textInput.addEventListener("keyup", function(e){
         // reset text
         debugger
         textInput.value = "";
+        // function(app.initialize(text), app.useRita);
         app.initialize(text);
-        book.classList.toggle("poems");
-        book.classList.toggle("moveRight");
-        // app.useRita();
     }
 })
 
@@ -27,16 +26,33 @@ randomPoem.addEventListener("click", function(){
     app.initialize();
 })
 
+returnHome.addEventListener("click", function () {
+    debugger
+    book.classList.toggle("poems");
+    book.classList.toggle("moveRight");
+    app.lines = [];
+    // document.getElementById('haikuHolder').innerHTML = "";
+})
+
 // ----------- Main App
 var app = {
     wikiText: [],
     wikiTitle: [],
+    lines: [],
 
 
     // transmit input to next function
     initialize: function (input) {
+        debugger
         app.getWikipediaData(input);
     },
+
+    // transmit input to next function
+    // app.getWikipediaData(input, callback) {
+    //     debugger
+    //     app.getWikipediaData(input);
+    //     callback();
+    // },
 
     // handles the data input onto page
     makePoem: function (lines) {
@@ -50,6 +66,8 @@ var app = {
         }
         // sets html for page 4
         document.getElementById('haikuHolder').innerHTML = theHTML;
+        book.classList.toggle("poems");
+        book.classList.toggle("moveRight");
     },
 
     // gets data from api
@@ -97,6 +115,7 @@ var app = {
                     var textResults = json.query.pages;
                     app.wikiText = textResults[`${pageid[0]}`].revisions[0]["*"];
                     app.wikiTitle = textResults[`${pageid[0]}`].title;
+                    setTimeout(app.useRita);
                 })
 
                 .catch(error => {
@@ -121,10 +140,11 @@ var app = {
                 var textResults = json.query.pages;
                 app.wikiText = textResults[`${pageid}`].revisions[0].slots.main["*"];
                 app.wikiTitle = textResults[`${pageid}`].title;
+                setTimeout(app.useRita);
             })
-            if (app.wikiText[0]){
-                app.useRita();
-            }
+            // if (app.wikiText[0]){
+            //     app.useRita();
+            // }
             // .then(app.useRita())
     },
 
@@ -137,6 +157,7 @@ var app = {
 
     // parse data with rita
     lines13: function(){
+        debugger
         // while ()
         var syllables = 0;
         var maxSyllables = 5;
@@ -148,7 +169,17 @@ var app = {
             if (tries >20){
                 break;
             }
-            word = RiTa.randomWord();
+            // word = RiTa.randomWord();
+
+            // generate random number between 0 1
+            // multiply that by array length
+            // send this word into next function
+            var number = (Math.floor(Math.random() * app.wikiText.length));
+            // console.log(number);
+            word = app.wikiText[number];
+            if (word.length > 12){
+                continue
+            }
             if (app.processSyllables(word) > maxSyllables) {
                 if (maxSyllables === 0){
                     break;
@@ -183,7 +214,9 @@ var app = {
             if (tries > 20) {
                 break;
             }
-            word = RiTa.randomWord();
+            var number = (Math.floor(Math.random() * app.wikiText.length));
+            // console.log(number);
+            word = app.wikiText[number];
             if (app.processSyllables(word) > maxSyllables){
                 if (maxSyllables === 0){
                     break;
@@ -210,8 +243,11 @@ var app = {
     removeExtras: function(){
         debugger
         var tempString = RiTa.stripPunctuation(app.wikiText);
-        var wordDatabase = RiTa.tokenize(tempString);
-        return(wordDatabase);
+        app.wikiText = RiTa.tokenize(tempString);
+        // const wikiTextNew = app.wikiText.map(x => '"' + x + '"');
+        // app.wikiText = RiTa.words(tempString);
+
+        // return(wordDatabase);
         // for (i = 0; i < string.length(); i++) {
         //     var letter = string.charCodeAt(i);
         //     if (letter )
@@ -221,13 +257,15 @@ var app = {
 // need to add name for this function
     useRita: function(){
         debugger
-        wordDatabase = app.removeExtras();
+        // wordDatabase = app.removeExtras();
+        // var wordDatabase = RiTa.tokenize(words.txt)
+        app.removeExtras();
         // var lines = [];
         // wordDatabase = new RiString(app.wikiText);
-        lines.push(app.lines13());
-        lines.push(app.lines2());
-        lines.push(app.lines13());
-        app.makePoem(lines);
+        app.lines.push(app.lines13());
+        app.lines.push(app.lines2());
+        app.lines.push(app.lines13());
+        app.makePoem(app.lines);
     }
 
 

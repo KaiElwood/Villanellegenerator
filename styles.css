@@ -94,6 +94,14 @@
   height: 100%;
   width: 100%;
 }
+#book #page6 input {
+  color: #3d3d3de3;
+  font-size: 1rem;
+  position: relative;
+  left: 25%;
+  top: 50vh;
+  border: 1px;
+}
 
 .poems {
   border-top-right-radius: 1em;
@@ -137,6 +145,14 @@
 
 .moveRight {
   transform: translateX(50%);
+}
+
+.title {
+  padding: 30px;
+}
+
+.haiku {
+  padding-left: 30px;
 }
 
 /*# sourceMappingURL=styles.css.map */
