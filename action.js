@@ -244,6 +244,9 @@ var app = {
         debugger
         var tempString = RiTa.stripPunctuation(app.wikiText);
         app.wikiText = RiTa.tokenize(tempString);
+        // for (i=0; i<app.wikiText.length; i++){
+        //     if i
+        // }
         // const wikiTextNew = app.wikiText.map(x => '"' + x + '"');
         // app.wikiText = RiTa.words(tempString);
 
