@@ -244,8 +244,18 @@ var app = {
         debugger
         var tempString = RiTa.stripPunctuation(app.wikiText);
         app.wikiText = RiTa.tokenize(tempString);
+            // checks to see if string has number -- if so, removes word from array
+        app.wikiText = app.wikiText.filter(string => /\d/.test(string) === false);
+        app.wikiText = app.wikiText.filter(string => /\W/.test(string) === false);
+        // wordsDatabase = app.wikiText.filter(string => /\d/.test(string) === false);
+        // app.wikiText = wordsDatabase;
         // for (i=0; i<app.wikiText.length; i++){
-        //     if i
+            // if (hasNumber(i) === false) {
+
+            // }
+            // for (i=0; i<app.wikiText[i].length; i++){
+            //     if (hasNumber(i))
+            // }
         // }
         // const wikiTextNew = app.wikiText.map(x => '"' + x + '"');
         // app.wikiText = RiTa.words(tempString);
