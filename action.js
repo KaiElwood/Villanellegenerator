@@ -14,7 +14,7 @@ textInput.addEventListener("keyup", function(e){
         // save text as variable
         var text = textInput.value;
         // reset text
-        debugger
+        // debugger
         textInput.value = "";
         // function(app.initialize(text), app.useRita);
         app.initialize(text);
@@ -27,7 +27,7 @@ randomPoem.addEventListener("click", function(){
 })
 
 returnHome.addEventListener("click", function () {
-    debugger
+    // debugger
     book.classList.toggle("poems");
     book.classList.toggle("moveRight");
     app.lines = [];
@@ -43,7 +43,7 @@ var app = {
 
     // transmit input to next function
     initialize: function (input) {
-        debugger
+        // debugger
         app.getWikipediaData(input);
     },
 
@@ -56,7 +56,7 @@ var app = {
 
     // handles the data input onto page
     makePoem: function (lines) {
-        debugger
+        // debugger
         var theHTML = '';
         theHTML += "<h1 class='title'>" + app.wikiTitle + "</h1>";
         for (var i = 0; i < lines.length; i++) {
@@ -110,7 +110,7 @@ var app = {
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    debugger;
+                    // debugger;
                     pageid = Object.keys(json.query.pages);
                     var textResults = json.query.pages;
                     app.wikiText = textResults[`${pageid[0]}`].revisions[0]["*"];
@@ -157,7 +157,7 @@ var app = {
 
     // parse data with rita
     lines13: function(){
-        debugger
+        // debugger
         // while ()
         var syllables = 0;
         var maxSyllables = 5;
@@ -241,7 +241,7 @@ var app = {
     },
 
     removeExtras: function(){
-        debugger
+        // debugger
         var tempString = RiTa.stripPunctuation(app.wikiText);
         app.wikiText = RiTa.tokenize(tempString);
             // checks to see if string has number -- if so, removes word from array
@@ -269,7 +269,7 @@ var app = {
     },
 // need to add name for this function
     useRita: function(){
-        debugger
+        // debugger
         // wordDatabase = app.removeExtras();
         // var wordDatabase = RiTa.tokenize(words.txt)
         app.removeExtras();

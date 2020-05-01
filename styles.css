@@ -2,9 +2,9 @@
   font-family: "Special Elite", cursive;
 }
 * body {
-  background-color: #e2f8ffd5;
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("https://images.unsplash.com/photo-1528328791021-a7d71822ffcd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
   display: flex;
-  color: #3d3d3de3;
+  color: #160f0aec;
 }
 
 #front #header {
@@ -15,10 +15,12 @@
 }
 #front #header h1 {
   padding: 5%;
+  padding-bottom: 0;
   margin: auto;
   text-align: left;
   width: 80%;
   font-size: 2.6rem;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3), 0px -1px 0px rgba(0, 0, 0, 0.7);
 }
 #front #explanation {
   position: absolute;
@@ -27,19 +29,23 @@
 }
 #front #wordInput {
   position: absolute;
-  top: 350px;
-  left: 25%;
+  top: 30%;
+  left: 10%;
   z-index: 999;
 }
 #front input {
   background: unset;
   outline: none;
+  border-color: #160f0aec;
   font-size: 1rem;
-  width: 75%;
+  width: 300px;
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: groove;
+}
+#front input::placeholder {
+  color: #160f0aec;
 }
 #front #footer {
   position: absolute;
@@ -61,24 +67,22 @@
   transform-style: preserve-3d;
   position: relative;
   height: 90vh;
-  width: 33vw;
-  min-width: 400px;
+  width: 400px;
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
   transition: transform 1s ease-in-out;
 }
 #book #front {
   -webkit-box-shadow: inset 2px -1px 2px 4px rgba(5, 10, 50, 0.05), inset 3px -1px 1px 1px rgba(5, 10, 50, 0.3);
-  box-shadow: inset 2px -1px 2px 4px rgba(5, 10, 50, 0.05), inset 3px -1px 1px 1px rgba(5, 10, 50, 0.3);
+  box-shadow: inset 2px -1px 2px 4px rgba(5, 10, 50, 0.05), inset 3px -1px 1px 1px rgba(5, 10, 50, 0.3), -9px 0px 40px 9px rgba(0, 0, 0, 0.62), -20px -8px 40px 9px rgba(0, 0, 0, 0.05);
 }
 #book #front, #book #back {
-  background: #D3CCE3;
-  background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);
-  background: linear-gradient(to right, #E9E4F0, #D3CCE3);
+  background: url(assets/vintage-book-cover-textures-6.jpg);
+  background-size: cover;
 }
 #book #page1, #book #page2, #book #page3, #book #page4, #book #page5, #book #page6 {
   background: #ffffff;
-  background: linear-gradient(90deg, rgba(2, 0, 36, 0) 0%, white 3%, white 100%);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 0.4) 0%, white 1%, white 100%);
 }
 #book > div {
   position: absolute;
@@ -154,6 +158,60 @@
 
 .haiku {
   padding-left: 30px;
+}
+
+@media (max-width: 500px) {
+  body {
+    margin: 0;
+  }
+
+  #book {
+    width: 100vw;
+    height: 100vh;
+    padding: none;
+    margin: none;
+    top: 0;
+  }
+
+  .moveRight {
+    transform: none;
+  }
+
+  .poems #front {
+    transform: rotateY(-180deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
+  .poems #text {
+    display: none;
+  }
+  .poems #page1 {
+    transform: rotateY(-170deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
+  .poems #page2 {
+    transform: rotateY(-5deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
+  .poems #page3 {
+    transform: rotateY(-165deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
+  .poems #page4 {
+    transform: rotateY(-8deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
+  .poems #page5 {
+    transform: rotateY(-160deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
+  .poems #page6 {
+    transform: rotateY(-10deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
+  .poems #back {
+    transform: rotateY(0deg);
+    box-shadow: 0 1em 3em 0 rgba(0, 0, 0, 0.12);
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
